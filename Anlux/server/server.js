@@ -10,7 +10,7 @@ const glasses = require('./Routes/Glasses.routes')
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173', // replace with your frontend URL
+    origin: 'http://anluxuries.com/', // replace with your frontend URL
     credentials: true
 }));
 
