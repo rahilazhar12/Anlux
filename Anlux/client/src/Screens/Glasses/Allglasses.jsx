@@ -14,7 +14,7 @@ function Allglasses() {
   useEffect(() => {
     const fetchBags = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/glasses-get`);
+        const response = await fetch(`http://api.anluxuries.com/api/glasses-get`);
         const data = await response.json();
         setBags(data);
       } catch (error) {
