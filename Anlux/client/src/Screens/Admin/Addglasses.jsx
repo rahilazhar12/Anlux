@@ -31,7 +31,7 @@ const AddGlasses = () => {
         form.append('newPrice', formData.newPrice);
 
         try {
-            const response = await fetch('http://localhost:8000/api/glasses-post', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/glasses-post`, {
                 method: 'POST',
                 body: form
             });
