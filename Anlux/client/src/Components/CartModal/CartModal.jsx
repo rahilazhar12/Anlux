@@ -77,7 +77,7 @@ const CartModal = ({ isOpen, closeModal }) => {
                                 <li key={product._id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <img
-                                      src={`http://localhost:8000/${product.image}`}
+                                      src={`${import.meta.env.VITE_API_URL}/${product.image}`}
                                       alt={product.name}
                                       className="h-full w-full object-cover object-center"
                                     />

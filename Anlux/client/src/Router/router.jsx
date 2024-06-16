@@ -5,6 +5,9 @@ import Allbags from "../Screens/Bags/Allbags";
 import AddProductForm from "../Screens/Admin/AddBags";
 import AddGlasses from "../Screens/Admin/Addglasses";
 import Allglasses from "../Screens/Glasses/Allglasses";
+import Checkout from "../Screens/Chekout/Checkout";
+import SummaryPage from "../Screens/Summary/Summary";
+import Thankyou from "../Screens/Thankyou/Thankyou";
 
 
 
@@ -19,7 +22,10 @@ const router = createBrowserRouter([
         { path: "/All-Bags", element: <Allbags /> },
         { path: "/Add-bags", element: <AddProductForm /> },
         { path: "/Add-glasses", element: <AddGlasses /> },
-        { path: "/All-glasses", element: <Allglasses /> },
+        { path: "/checkout", element: <Checkout /> },
+        { path: "/summary", element: <SummaryPage /> },
+        { path: "/complete", element: <Thankyou /> },
+       
       ],
     },
   
