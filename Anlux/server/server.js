@@ -9,7 +9,7 @@ const glasses = require('./Routes/Glasses.routes')
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: 'http://anluxuries.com' }));
 
 app.use('/uploads', express.static('uploads'));
 
