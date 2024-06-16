@@ -14,7 +14,7 @@ function Allglasses() {
   useEffect(() => {
     const fetchBags = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/glasses-get');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/glasses-get`);
         const data = await response.json();
         setBags(data);
       } catch (error) {
@@ -56,7 +56,7 @@ function Allglasses() {
         {bags.map((bag) => (
           <div key={bag._id} className="relative bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <div className="relative">
-              <img src={`http://localhost:8000/${bag.image}`} alt={bag.name} className="w-full h-56 object-cover" />
+              <img src={`${import.meta.env.VITE_API_URL}/${bag.image}`} alt={bag.name} className="w-full h-56 object-cover" />
               <span className="absolute top-0 right-0 bg-red-500 text-white text-sm px-2 py-1 rounded-bl-lg">
                 {bag.discountPercentage}% off
               </span>

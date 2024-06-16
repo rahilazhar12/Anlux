@@ -31,7 +31,7 @@ const AddProductForm = () => {
         form.append('newPrice', formData.newPrice);
 
         try {
-            const response = await fetch('/api/bags-post', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bags-post`, {
                 method: 'POST',
                 body: form
             });

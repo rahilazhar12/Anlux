@@ -33,7 +33,7 @@ const Homebags = () => {
 
   useEffect(() => {
     // Fetch all products
-    fetch('http://localhost:8000/api/bags-get')
+    fetch(`${import.meta.env.VITE_API_URL}/api/bags-get`)
       .then(response => response.json())
       .then(data => {
         setProducts(data);

@@ -28,7 +28,7 @@ const SunglassesCards = ({ product, openCartModal }) => {
     <div className="w-full sm:w-1/2 md:w-1/4 p-2" data-aos="fade-up">
       <div className="card bg-white shadow-xl relative border border-black">
         <figure className="relative">
-          <img src={`http://localhost:8000/${product.image}`} alt={product.name} className='h-64 w-full object-cover' onError={(e) => e.target.src = 'https://via.placeholder.com/150'} />
+          <img src={`${import.meta.env.VITE_API_URL}/${product.image}`} alt={product.name} className='h-64 w-full object-cover' onError={(e) => e.target.src = 'https://via.placeholder.com/150'} />
           <div className="absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded">
             -{product.discountPercentage}%
           </div>
