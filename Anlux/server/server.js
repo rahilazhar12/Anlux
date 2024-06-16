@@ -9,10 +9,11 @@ const glasses = require('./Routes/Glasses.routes')
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: 'http://anluxuries.com/', // replace with your frontend URL
-    credentials: true
-}));
+const corsOptions = {
+    origin: ['http://localhost:5173', 'http://anluxuries.com/']  // Allow requests from both these origins
+};
+
+app.use(cors(corsOptions));
 
 app.use('/uploads', express.static('uploads'));
 
