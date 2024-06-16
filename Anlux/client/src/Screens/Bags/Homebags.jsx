@@ -42,7 +42,7 @@ const Homebags = () => {
   }, []);
   useEffect(() => {
     // Fetch all products
-    fetch('http://api.anluxuries.com/api/glasses-get')
+    fetch('http://localhost:8000/api/glasses-get')
       .then(response => response.json())
       .then(data => {
         setGlasses(data);
