@@ -10,7 +10,7 @@ const glasses = require('./Routes/Glasses.routes')
 const app = express();
 app.use(express.json());
 const corsOptions = {
-    origin: ['http://localhost:5173', 'https://anluxuries.com']  // Allow requests from both these origins
+    origin: ['http://localhost:5173', 'https://anluxuries.com' , 'https://www.anluxuries.com']  // Allow requests from both these origins
 };
 
 app.use(cors(corsOptions));
