@@ -165,7 +165,7 @@ const Checkout = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Shipping</p>
-                  <p className="font-semibold text-gray-900">Rs200</p>
+                  <p className="font-semibold text-gray-900">Rs300</p>
                 </div>
               </div>
               <div className="mt-6 flex items-center justify-between">
