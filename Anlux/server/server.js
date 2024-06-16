@@ -9,16 +9,11 @@ const glasses = require('./Routes/Glasses.routes')
 
 const app = express();
 app.use(express.json());
-const allowedOrigins = ['http://anluxuries.com', 'http://localhost:5173'];
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
-}));
+const corsOptions = {
+    origin: ['http://localhost:5173', 'http://anluxuries.com']  // Allow requests from both these origins
+};
+
+app.use(cors(corsOptions));
 
 app.use('/uploads', express.static('uploads'));
 
