@@ -1,24 +1,31 @@
 // controllers/Bags.controller.js
 const Glasses = require('../Modals/Glasses.modal');
+const Bags = require('../Modals/Bags.modal')
+const mongoose = require('mongoose')
 
 exports.Glassespost = async (req, res) => {
     const { name, discountPercentage, description, oldPrice, newPrice } = req.body;
-    const image = req.file; // Get the uploaded file information
+    const files = req.files;
 
     // Validate that all required fields are provided
-    if (!name || !discountPercentage || !image || !description || !oldPrice || !newPrice) {
+    if (!name || !discountPercentage || !files || files.length < 1 || !description || !oldPrice || !newPrice) {
         return res.status(400).send({ error: 'Please provide all required fields' });
     }
 
     try {
+        const mainImage = files[0].path; // The first image is the main image
+        const additionalImages = files.slice(1).map(file => file.path); // The rest are additional images
+
         const product = new Glasses({
             name,
             discountPercentage,
-            image: image.path, // Save the file path in the database
+            mainImage,
+            additionalImages,
             description,
             oldPrice,
             newPrice
         });
+
         await product.save();
         res.status(201).send(product);
     } catch (error) {
@@ -33,5 +40,96 @@ exports.getAllGlasses = async (req, res) => {
         res.status(200).send(products);
     } catch (error) {
         res.status(500).send({ error: error.message });
+    }
+};
+
+
+// Get glass by ID
+// exports.getGlassById = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const product = await Glasses.findById(id);
+
+//         if (!product) {
+//             return res.status(404).send({ error: 'Glass not found' });
+//         }
+
+//         res.status(200).send(product);
+//     } catch (error) {
+//         res.status(500).send({ error: error.message });
+//     }
+// };
+
+exports.getItemById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Check both collections for the ID
+        const glassesItem = await mongoose.model('glasses').findById(id);
+        const bagsItem = await mongoose.model('bags').findById(id);
+
+        // Determine the correct model based on which item was found
+        glassesItem ? mongoose.model('glasses') : mongoose.model('bags');
+        const item = glassesItem || bagsItem; // Get the found item
+
+        if (!item) {
+            return res.status(404).send({ error: 'Item not found' });
+        }
+
+        res.status(200).send(item);
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+};
+
+
+// exports.orderimagechange = async (req, res) => {
+//     const { id } = req.params;
+//     const { mainImage, additionalImages } = req.body;
+
+//     try {
+//         const product = await Glasses.findById(id);
+//         if (!product) {
+//             return res.status(404).send({ error: 'Product not found' });
+//         }
+
+//         product.mainImage = mainImage;
+//         product.additionalImages = additionalImages;
+
+//         await product.save();
+//         res.status(200).send(product);
+//     } catch (error) {
+//         res.status(400).send({ error: error.message });
+//     }
+// }
+
+
+exports.orderimagechange = async (req, res) => {
+    const { id } = req.params;
+    const { mainImage, additionalImages } = req.body;
+
+    try {
+        // Try to find the product in Bags collection first
+        let product = await Bags.findById(id);
+        
+        if (!product) {
+            // If not found in Bags, try to find it in Glasses collection
+            product = await Glasses.findById(id);
+        }
+
+        // If product is still not found, return an error
+        if (!product) {
+            return res.status(404).send({ error: 'Product not found' });
+        }
+
+        // Update the product images
+        product.mainImage = mainImage;
+        product.additionalImages = additionalImages;
+
+        // Save the updated product
+        await product.save();
+        res.status(200).send(product);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
     }
 };

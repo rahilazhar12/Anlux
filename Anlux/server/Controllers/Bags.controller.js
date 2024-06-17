@@ -3,18 +3,21 @@ const Product = require('../Modals/Bags.modal');
 
 exports.Bagspost = async (req, res) => {
     const { name, discountPercentage, description, oldPrice, newPrice } = req.body;
-    const image = req.file; // Get the uploaded file information
+    const files = req.files;
 
     // Validate that all required fields are provided
-    if (!name || !discountPercentage || !image || !description || !oldPrice || !newPrice) {
+    if (!name || !discountPercentage || !files || files.length < 1 || !description || !oldPrice || !newPrice) {
         return res.status(400).send({ error: 'Please provide all required fields' });
     }
 
     try {
+        const mainImage = files[0].path; // The first image is the main image
+        const additionalImages = files.slice(1).map(file => file.path); // The rest are additional images
         const product = new Product({
             name,
             discountPercentage,
-            image: image.path, // Save the file path in the database
+            mainImage,
+            additionalImages,
             description,
             oldPrice,
             newPrice
