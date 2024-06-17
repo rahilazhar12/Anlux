@@ -140,7 +140,7 @@ const Productdetail = () => {
           <div className="w-full md:w-1/2 p-5">
             {/* Big Image */}
             <img
-              src={`http://localhost:8000/${mainImage}`}
+              src={`${import.meta.env.VITE_API_URL}/${mainImage}`}
               alt="Big Product"
               className="w-full h-auto rounded-xl"
             />
