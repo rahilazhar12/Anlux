@@ -8,6 +8,7 @@ import Allglasses from "../Screens/Glasses/Allglasses";
 import Checkout from "../Screens/Chekout/Checkout";
 import SummaryPage from "../Screens/Summary/Summary";
 import Thankyou from "../Screens/Thankyou/Thankyou";
+import Productdetail from "../Screens/Productdetailpage/Productdetail";
 
 
 
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         { path: "/checkout", element: <Checkout /> },
         { path: "/summary", element: <SummaryPage /> },
         { path: "/complete", element: <Thankyou /> },
+        { path: "/detailpage/:id", element: <Productdetail /> },
        
       ],
     },

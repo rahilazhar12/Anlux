@@ -26,6 +26,9 @@ const CartModal = ({ isOpen, closeModal }) => {
     dispatch(clearCart());
   };
 
+
+  console.log(cartItems)
+
   return (
     <Transition show={isOpen}>
       <Dialog className="relative z-10" onClose={closeModal}>

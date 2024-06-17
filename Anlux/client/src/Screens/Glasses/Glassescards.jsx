@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart } from '../../Redux/cartSlice';
-import toast from 'react-hot-toast';
+import {  useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const SunglassesCards = ({ product, openCartModal }) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
   const cartItems = useSelector(state => state.cart.items);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -13,22 +13,16 @@ const SunglassesCards = ({ product, openCartModal }) => {
     setAddedToCart(!!itemInCart);
   }, [cartItems, product._id]);
 
-  const addToCartHandler = () => {
-    dispatch(addItemToCart({
-      _id: product._id,
-      name: product.name,
-      newPrice: parseFloat(product.newPrice),
-      image: product.image
-    }));
-    setAddedToCart(true);
-    toast.success(`${product.name} added to cart successfully!`);
-  };
+
+  const navigatehandller = (id) =>{
+      navigate(`/detailpage/${id}`)
+  }
 
   return (
     <div className="w-full sm:w-1/2 md:w-1/4 p-2" data-aos="fade-up">
       <div className="card bg-white shadow-xl relative border border-black">
         <figure className="relative">
-          <img src={`${import.meta.env.VITE_API_URL}/${product.image}`} alt={product.name} className='h-64 w-full object-cover' onError={(e) => e.target.src = 'https://via.placeholder.com/150'} />
+          <img src={`${import.meta.env.VITE_API_URL}/${product.mainImage}`} alt={product.name} className='h-64 w-full object-cover' onError={(e) => e.target.src = 'https://via.placeholder.com/150'} />
           <div className="absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded">
             -{product.discountPercentage}%
           </div>
@@ -47,9 +41,9 @@ const SunglassesCards = ({ product, openCartModal }) => {
             ) : (
               <button
                 className="btn btn-outline hover:text-white hover:bg-red-400"
-                onClick={addToCartHandler}
+                onClick={()=>navigatehandller(product._id)}
               >
-                Add to Cart
+                Order Now
               </button>
             )}
           </div>

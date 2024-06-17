@@ -9,6 +9,7 @@ import router from './Router/router.jsx'
 import { Toaster } from 'react-hot-toast';
 
 
+
 const store = configureStore({
   reducer: {
     cart: cartReducer,

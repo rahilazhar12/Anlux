@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import Confetti from 'react-confetti';
+import { clearCart } from '../../Redux/cartSlice';
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
@@ -17,6 +20,7 @@ const Checkout = () => {
     zip: '',
     shippingMethod: 'Cash on Delivery',
   });
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,7 +45,12 @@ const Checkout = () => {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`, orderData);
       console.log('Order placed successfully:', response.data);
       toast.success('Order placed successfully!');
-      navigate('/complete');
+       // Clear the cart after a successful order
+       dispatch(clearCart());
+      setShowConfetti(true);
+      setTimeout(() => {
+        navigate('/complete');
+      }, 3000); // Navigate after showing confetti for a few seconds
     } catch (error) {
       console.error('Error placing order:', error);
       toast.error('Error placing order. Please try again.');
@@ -50,6 +59,7 @@ const Checkout = () => {
 
   return (
     <div>
+      {showConfetti && <Confetti />}
       <div className='mb-10 p-5'>
         <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
           <div className='text-gray-900 font-bold text-2xl'>Checkout</div>
@@ -178,7 +188,7 @@ const Checkout = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Checkout;
