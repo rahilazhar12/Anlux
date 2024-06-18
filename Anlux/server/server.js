@@ -6,12 +6,14 @@ const cors = require('cors');
 const bags = require('./Routes/Bags.routes')
 const glasses = require('./Routes/Glasses.routes')
 const orders = require('./Routes/Order.routes')
+const compression = require('compression');
+
 
 
 const app = express();
 app.use(express.json());
 const corsOptions = {
-    origin: ['http://localhost:5173', 'https://anluxuries.com']  // Allow requests from both these origins
+    origin: ['http://localhost:5173', 'https://www.anluxuries.com']  // Allow requests from both these origins
 };
 
 app.use(cors(corsOptions));
@@ -24,6 +26,11 @@ connectToMongoDB();
 app.get('/home', (req, res) => {
     res.send({ Message: "Hellow World" })
 })
+
+// Enable gzip compression
+app.use(compression());
+
+
 
 
 
