@@ -85,17 +85,40 @@ const Addbags = () => {
                     required
                 />
             </div>
-            <div className="mb-4">
-                <label className="block text-gray-700">Image</label>
-                <input
-                    type="file"
-                    name="images"
-                    multiple
-                    onChange={handleFileChange}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                />
-            </div>
+           {/* Custom Image Input */}
+           <div className="mb-4">
+        <label htmlFor="image-upload" className="block text-gray-700">
+          Image
+        </label>
+
+        <input 
+          id="image-upload"
+          type="file" 
+          name="images"
+          accept="image/*" 
+          onChange={handleFileChange}
+          multiple
+          style={{ display: 'none' }} 
+        />
+
+        <button
+          type="button" 
+          onClick={() => document.getElementById('image-upload').click()}
+          className="w-full bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300"
+        >
+          Select Images
+        </button>
+
+        {formData.images && (
+          <div className="mt-2">
+            {Array.from(formData.images).map((image, index) => (
+              <p key={index}>
+                {image.name}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
             <div className="mb-4">
                 <label className="block text-gray-700">Description</label>
                 <textarea
