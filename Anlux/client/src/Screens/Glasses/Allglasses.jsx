@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../../Redux/cartSlice'; // Adjust the path as necessary
 import CartModal from '../../Components/CartModal/CartModal'; // Adjust the path as necessary
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function Allglasses() {
+  const navigate = useNavigate()
   const [bags, setBags] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -25,19 +27,6 @@ function Allglasses() {
     fetchBags();
   }, []);
 
-  const addToCartHandler = (bag) => {
-    setIsLoading(true);
-    dispatch(addItemToCart({
-      _id: bag._id,
-      name: bag.name,
-      newPrice: parseFloat(bag.newPrice),
-      image: bag.image,
-    }));
-    setTimeout(() => {
-      setIsLoading(false);
-      toast.success(`${bag.name} added to cart!`);
-    }, 500); // Simulate loading time
-  };
 
   const openCartModal = () => {
     setIsCartModalOpen(true);
@@ -46,6 +35,10 @@ function Allglasses() {
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
+
+  const navigatehandller = (id) =>{
+    navigate(`/detailpage/${id}`)
+}
 
   const isItemInCart = (id) => cartItems.some(item => item._id === id);
 
@@ -56,7 +49,7 @@ function Allglasses() {
         {bags.map((bag) => (
           <div key={bag._id} className="relative bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <div className="relative">
-              <img src={`${import.meta.env.VITE_API_URL}/${bag.image}`} alt={bag.name} className="w-full h-56 object-cover" />
+              <img src={`${import.meta.env.VITE_API_URL}/${bag.mainImage}`} alt={bag.name} className="w-full h-56 object-cover" />
               <span className="absolute top-0 right-0 bg-red-500 text-white text-sm px-2 py-1 rounded-bl-lg">
                 {bag.discountPercentage}% off
               </span>
@@ -82,10 +75,10 @@ function Allglasses() {
                   </button>
                 ) : (
                   <button
-                    className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300"
-                    onClick={() => addToCartHandler(bag)}
+                    className="btn btn-outline hover:text-white hover:bg-red-400"
+                    onClick={() => navigatehandller(bag._id)}
                   >
-                    Add to Cart
+                    Order Now
                   </button>
                 )}
               </div>

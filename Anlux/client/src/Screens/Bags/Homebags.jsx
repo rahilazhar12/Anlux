@@ -103,9 +103,9 @@ const Homebags = () => {
   </div>
 </div>
 
-      <div>
+      {/* <div>
         <Topproducts />
-      </div>
+      </div> */}
     </>
   );
 }

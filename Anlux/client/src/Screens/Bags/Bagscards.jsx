@@ -24,7 +24,7 @@ const Bagscards = ({ product, openCartModal }) => {
 }
 
   return (
-    <div className="w-full sm:w-1/2 md:w-1/4 p-2" data-aos="fade-up">
+    <div className="w-full sm:w-1/2 md:w-1/3 p-2" data-aos="fade-up">
       <div className="card bg-white shadow-xl relative border border-black">
         <figure className="relative">
           <img src={`${import.meta.env.VITE_API_URL}/${product.mainImage}`} alt={product.name} className='h-64 w-full object-cover' onError={(e) => e.target.src = 'https://via.placeholder.com/150'} />
@@ -34,6 +34,7 @@ const Bagscards = ({ product, openCartModal }) => {
         </figure>
         <div className="card-body p-4">
           <h2 className="card-title text-lg font-bold">{product.name}</h2>
+          <p className='line-clamp-5'>{product.description}</p>
           <div className="flex items-center mt-2">
             <span className="text-lg font-semibold line-through mr-2">Rs {product.oldPrice}</span>
             <span className="text-lg font-semibold text-red-500">Rs {product.newPrice}</span>
