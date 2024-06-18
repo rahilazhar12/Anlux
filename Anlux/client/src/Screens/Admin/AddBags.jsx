@@ -16,8 +16,7 @@ const Addbags = () => {
   };
 
   const handleFileChange = (e) => {
-    const selectedFiles = e.target.files;
-    // Update formData with an array of selected files
+    const selectedFiles = Array.from(e.target.files);
     setFormData({ ...formData, images: selectedFiles });
   };
 
