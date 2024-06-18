@@ -45,10 +45,10 @@ const Bagscards = ({ product, openCartModal }) => {
               </button>
             ) : (
               <button
-                className="btn btn-info hover:text-white"
+                className="btn btn-outline hover:bg-red-400"
                 onClick={()=>navigatehandller(product._id)}
               >
-                Add to Cart
+                Order Now
               </button>
             )}
           </div>

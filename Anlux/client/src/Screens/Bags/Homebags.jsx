@@ -7,6 +7,7 @@ import Topproducts from '../Topsellingproducts.jsx/Topproducts';
 import CartModal from '../../Components/CartModal/CartModal';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ProductGrid from '../../Components/Categories/Categories';
 
 const Homebags = () => {
   const [products, setProducts] = useState([]);
@@ -52,6 +53,7 @@ const Homebags = () => {
 
   return (
     <>
+     <ProductGrid/>
     <div className='bg-gray-100 p-8'>
   <div className="container mx-auto">
     <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-900">Crossbody Bags</h2>

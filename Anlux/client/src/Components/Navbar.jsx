@@ -35,6 +35,11 @@ const Navbar = () => {
   };
 
   return (
+
+    <>
+    <div className="bg-[#FFE8E8] w-full h-10 flex justify-center items-center text-xs text-[#BF5D7C] font-semibold">
+       <p>FREE SHIPPPING over Rs.3499</p>
+    </div>
     <div className="">
       <nav className="bg-white dark:bg-gray-900 w-full z-10 top-15 start-0 border-b border-gray-200 dark:border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
@@ -169,6 +174,7 @@ const Navbar = () => {
       {/* Cart Modal */}
       <CartModal isOpen={isModalOpen} closeModal={closeModal} cartItems={cartItems} totalAmount={totalAmount} />
     </div>
+    </>
   );
 };
 
