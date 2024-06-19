@@ -1,39 +1,96 @@
-import Homebags from "../Screens/Bags/Homebags";
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Allbags from "../Screens/Bags/Allbags";
-import AddProductForm from "../Screens/Admin/AddBags";
-import AddGlasses from "../Screens/Admin/Addglasses";
-import Allglasses from "../Screens/Glasses/Allglasses";
-import Checkout from "../Screens/Chekout/Checkout";
-import SummaryPage from "../Screens/Summary/Summary";
-import Thankyou from "../Screens/Thankyou/Thankyou";
-import Productdetail from "../Screens/Productdetailpage/Productdetail";
+import React, { Suspense } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import App from '../App';
 
-
-
-
+const Homebags = React.lazy(() => import('../Screens/Bags/Homebags'));
+const Allbags = React.lazy(() => import('../Screens/Bags/Allbags'));
+const AddProductForm = React.lazy(() => import('../Screens/Admin/AddBags'));
+const AddGlasses = React.lazy(() => import('../Screens/Admin/Addglasses'));
+const Allglasses = React.lazy(() => import('../Screens/Glasses/Allglasses'));
+const Checkout = React.lazy(() => import('../Screens/Chekout/Checkout'));
+const SummaryPage = React.lazy(() => import('../Screens/Summary/Summary'));
+const Thankyou = React.lazy(() => import('../Screens/Thankyou/Thankyou'));
+const Productdetail = React.lazy(() => import('../Screens/Productdetailpage/Productdetail'));
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <App />,
-      children: [
-        { path: "/", element: <Homebags /> },
-        { path: "/All-Bags", element: <Allbags /> },
-        { path: "/Add-bags", element: <AddProductForm /> },
-        { path: "/Add-glasses", element: <AddGlasses /> },
-        { path: "/All-glasses", element: <Allglasses /> },
-        { path: "/checkout", element: <Checkout /> },
-        { path: "/summary", element: <SummaryPage /> },
-        { path: "/complete", element: <Thankyou /> },
-        { path: "/detailpage/:id", element: <Productdetail /> },
-       
-      ],
-    },
-  
-   
-  ]);
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      { 
+        path: '/', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Homebags />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/All-Bags', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Allbags />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/Add-bags', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <AddProductForm />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/Add-glasses', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <AddGlasses />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/All-glasses', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Allglasses />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/checkout', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Checkout />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/summary', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <SummaryPage />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/complete', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Thankyou />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/detailpage/:id', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Productdetail />
+          </Suspense>
+        ) 
+      },
+    ],
+  },
+]);
 
-
-  export default router;
+export default router;

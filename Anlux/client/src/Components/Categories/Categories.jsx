@@ -3,13 +3,7 @@ import { FaShoppingBag, FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons
 import { FaArrowUpLong } from "react-icons/fa6";
 import { IoShareSocialSharp } from "react-icons/io5";
 
-const products = [
-  { price: 1599, image: 'https://rtwcreation.com/cdn/shop/files/rs-1599-sale-handbags-rtw-creation-pakistan_1880x.jpg?v=1697628682', label: 'Starting from' },
-  { price: 2599, image: 'https://rtwcreation.com/cdn/shop/files/rs-1599-sale-handbags-rtw-creation-pakistan_1880x.jpg?v=1697628682', label: 'Pick any for just' },
-  { price: 2799, image: 'https://rtwcreation.com/cdn/shop/files/Rs.27999-sale-online-pakistan_c7422e1a-902a-4113-8aae-501e29b11bc7_1880x.jpg?v=1695303654', label: 'Pick any for just' },
-  { price: 2399, image: 'https://rtwcreation.com/cdn/shop/files/rs-2999-sale-handbags-rtw-creation-pakistan_1880x.jpg?v=1697628803', label: 'Pick any for just' },
-  { price: 2999, image: 'https://rtwcreation.com/cdn/shop/files/rs-2399-sale-handbags-rtw-creation-pakistan_1880x.jpg?v=1697628700', label: 'Pick any for just' },
-];
+
 
 
 const navItems = [
@@ -95,14 +89,7 @@ const ProductGrid = () => {
     </div>
 
     
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:px-20 md:py-4 px-3 py-4">
-      {products.map((product, index) => (
-        <div key={index} className={`relative ${index === 2 ? 'lg:col-span-2 lg:row-span-1' : ''}`}>
-          <img src={product.image} alt={`Product ${index + 1}`} className="w-full h-ful object-cover" />
-        
-        </div>
-      ))}
-    </div>
+    
     </>
   );
 };
