@@ -1,114 +1,48 @@
-import React, { Suspense } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import React from 'react';
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import App from '../App';
+import Home from '../Screens/Home/Home';
 import Allwatches from '../Screens/Watches/Allwatches';
 import Addwatches from '../Screens/Admin/Addwatches';
+import Allbags from '../Screens/Bags/Allbags';
+import AddProductForm from '../Screens/Admin/AddBags';
+import AddGlasses from '../Screens/Admin/Addglasses';
+import Allglasses from '../Screens/Glasses/Allglasses';
+import Checkout from '../Screens/Chekout/Checkout';
+import SummaryPage from '../Screens/Summary/Summary';
+import Thankyou from '../Screens/Thankyou/Thankyou';
+import Productdetail from '../Screens/Productdetailpage/Productdetail';
 
-const Homebags = React.lazy(() => import('../Screens/Home/Home'));
-const Allbags = React.lazy(() => import('../Screens/Bags/Allbags'));
-const AddProductForm = React.lazy(() => import('../Screens/Admin/AddBags'));
-const AddGlasses = React.lazy(() => import('../Screens/Admin/Addglasses'));
-const Allglasses = React.lazy(() => import('../Screens/Glasses/Allglasses'));
-const Checkout = React.lazy(() => import('../Screens/Chekout/Checkout'));
-const SummaryPage = React.lazy(() => import('../Screens/Summary/Summary'));
-const Thankyou = React.lazy(() => import('../Screens/Thankyou/Thankyou'));
-const Productdetail = React.lazy(() => import('../Screens/Productdetailpage/Productdetail'));
+const loadHomeData = async () => {
+  const bags = fetch(`${import.meta.env.VITE_API_URL}/api/bags-get`).then(res => res.json());
+  const glasses = fetch(`${import.meta.env.VITE_API_URL}/api/glasses-get`).then(res => res.json());
+  const watches = fetch(`${import.meta.env.VITE_API_URL}/api/watches-get`).then(res => res.json());
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      { 
-        path: '/', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Homebags />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/All-Bags', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Allbags />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/Add-bags', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <AddProductForm />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/Add-glasses', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <AddGlasses />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/All-glasses', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Allglasses />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/Add-watches', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Addwatches />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/All-watches', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Allwatches />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/checkout', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Checkout />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/summary', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <SummaryPage />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/complete', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Thankyou />
-          </Suspense>
-        ) 
-      },
-      { 
-        path: '/detailpage/:id', 
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Productdetail />
-          </Suspense>
-        ) 
-      },
-    ],
-  },
-]);
+  const [bagsData, glassesData, watchesData] = await Promise.all([bags, glasses, watches]);
+
+  return { bags: bagsData, glasses: glassesData, watches: watchesData };
+};
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route
+        index
+        element={<Home />}
+        loader={loadHomeData}
+      />
+      <Route path="All-Bags" element={<Allbags />} />
+      <Route path="Add-bags" element={<AddProductForm />} />
+      <Route path="Add-glasses" element={<AddGlasses />} />
+      <Route path="All-glasses" element={<Allglasses />} />
+      <Route path="Add-watches" element={<Addwatches />} />
+      <Route path="All-watches" element={<Allwatches />} />
+      <Route path="checkout" element={<Checkout />} />
+      <Route path="summary" element={<SummaryPage />} />
+      <Route path="complete" element={<Thankyou />} />
+      <Route path="detailpage/:id" element={<Productdetail />} />
+    </Route>
+  )
+);
 
 export default router;
