@@ -47,11 +47,11 @@ function Allbags() {
 
   return (
     <div className="container mx-auto p-8 relative">
-      {isLoading && (
+      {/* {isLoading && (
         <div className="flex items-center justify-center fixed inset-0 bg-white bg-opacity-75 z-50">
           <CircleLoader color="#d63673"  size={80} />
         </div>
-      )}
+      )} */}
       <h1 className="text-4xl font-extrabold mb-8 text-center text-gray-800">Bags Collection</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {bags.map((bag) => (

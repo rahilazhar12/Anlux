@@ -1,46 +1,41 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import App from '../App';
-import Home from '../Screens/Home/Home';
-import Allwatches from '../Screens/Watches/Allwatches';
-import Addwatches from '../Screens/Admin/Addwatches';
-import Allbags from '../Screens/Bags/Allbags';
-import AddProductForm from '../Screens/Admin/AddBags';
-import AddGlasses from '../Screens/Admin/Addglasses';
-import Allglasses from '../Screens/Glasses/Allglasses';
-import Checkout from '../Screens/Chekout/Checkout';
-import SummaryPage from '../Screens/Summary/Summary';
-import Thankyou from '../Screens/Thankyou/Thankyou';
-import Productdetail from '../Screens/Productdetailpage/Productdetail';
+import ClipLoader from 'react-spinners/ClipLoader';
 
-const loadHomeData = async () => {
-  const bags = fetch(`${import.meta.env.VITE_API_URL}/api/bags-get`).then(res => res.json());
-  const glasses = fetch(`${import.meta.env.VITE_API_URL}/api/glasses-get`).then(res => res.json());
-  const watches = fetch(`${import.meta.env.VITE_API_URL}/api/watches-get`).then(res => res.json());
-
-  const [bagsData, glassesData, watchesData] = await Promise.all([bags, glasses, watches]);
-
-  return { bags: bagsData, glasses: glassesData, watches: watchesData };
-};
+const Home = lazy(() => import('../Screens/Home/Home'));
+const Allwatches = lazy(() => import('../Screens/Watches/Allwatches'));
+const Addwatches = lazy(() => import('../Screens/Admin/Addwatches'));
+const Allbags = lazy(() => import('../Screens/Bags/Allbags'));
+const AddProductForm = lazy(() => import('../Screens/Admin/AddBags'));
+const AddGlasses = lazy(() => import('../Screens/Admin/Addglasses'));
+const Allglasses = lazy(() => import('../Screens/Glasses/Allglasses'));
+const Checkout = lazy(() => import('../Screens/Chekout/Checkout'));
+const SummaryPage = lazy(() => import('../Screens/Summary/Summary'));
+const Thankyou = lazy(() => import('../Screens/Thankyou/Thankyou'));
+const Productdetail = lazy(() => import('../Screens/Productdetailpage/Productdetail'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route
         index
-        element={<Home />}
-        loader={loadHomeData}
+        element={
+          <Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}>
+            <Home />
+          </Suspense>
+        }
       />
-      <Route path="All-Bags" element={<Allbags />} />
-      <Route path="Add-bags" element={<AddProductForm />} />
-      <Route path="Add-glasses" element={<AddGlasses />} />
-      <Route path="All-glasses" element={<Allglasses />} />
-      <Route path="Add-watches" element={<Addwatches />} />
-      <Route path="All-watches" element={<Allwatches />} />
-      <Route path="checkout" element={<Checkout />} />
-      <Route path="summary" element={<SummaryPage />} />
-      <Route path="complete" element={<Thankyou />} />
-      <Route path="detailpage/:id" element={<Productdetail />} />
+      <Route path="All-Bags" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><Allbags /></Suspense>} />
+      <Route path="Add-bags" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><AddProductForm /></Suspense>} />
+      <Route path="Add-glasses" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><AddGlasses /></Suspense>} />
+      <Route path="All-glasses" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><Allglasses /></Suspense>} />
+      <Route path="Add-watches" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><Addwatches /></Suspense>} />
+      <Route path="All-watches" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><Allwatches /></Suspense>} />
+      <Route path="checkout" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><Checkout /></Suspense>} />
+      <Route path="summary" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><SummaryPage /></Suspense>} />
+      <Route path="complete" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><Thankyou /></Suspense>} />
+      <Route path="detailpage/:id" element={<Suspense fallback={<div className="flex justify-center items-center h-screen"><ClipLoader size={50} /></div>}><Productdetail /></Suspense>} />
     </Route>
   )
 );
