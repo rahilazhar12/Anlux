@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link rel="preload" href="/client/src/index.css" as="style" />
-    <link
-      rel="preload"
-      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-    /></noscript>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>An-Luxuries</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  
+  <!-- Preload Critical CSS -->
+  <link rel="preload" href="/client/src/index.css" as="style" />
+  <link rel="stylesheet" href="/client/src/index.css" />
+  
+  <!-- Preload and Async Load External CSS -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" /></noscript>
+  
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /></noscript>
+  
+  <!-- Preload Critical Fonts (if any) -->
+  <!-- Example for Google Fonts -->
+  <!-- <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" /> -->
+  <!-- <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" /></noscript> -->
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>An-Luxuries</title>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <!-- Load Critical Scripts -->
+  <script type="module" src="/src/main.jsx"></script>
+  
+  <!-- Async Load External JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" async></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
       AOS.init();
-    </script>
-    <script src="path/to/non-critical.js" defer></script>
-  </body>
+    });
+  </script>
+  
+  <!-- Defer Non-Critical JS -->
+  <script src="path/to/non-critical.js" defer></script>
+</body>
 </html>

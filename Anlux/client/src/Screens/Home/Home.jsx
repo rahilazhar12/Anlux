@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import {CircleLoader} from 'react-spinners'
+import Hero from '../../Components/Herosection/Hero';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -65,6 +66,9 @@ const Home = () => {
         </div>
       ) : (
         <>
+       <marquee scrollamount='10'>🌙 Eid Mubarak! Enjoy 50% OFF on all items! Limited time offer! 🌙</marquee>
+
+        <Hero/>
           {/* Bags */}
           <div className='bg-gray-100 p-8'>
             <div className="container mx-auto">

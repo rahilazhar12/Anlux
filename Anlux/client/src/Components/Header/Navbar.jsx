@@ -4,6 +4,7 @@ import { IoSearchOutline, IoClose } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import CartModal from "../CartModal/CartModal";
 import { Link } from "react-router-dom";
+import logo from '../../assets/logo.png'
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,6 +46,7 @@ const Navbar = () => {
         <nav className="bg-white dark:bg-gray-900 w-full z-10 top-15 start-0 border-b border-gray-200 dark:border-gray-600">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
             <div className="flex items-center space-x-1 rtl:space-x-reverse">
+              <img src={logo} alt="" width={80} />
               <span className="self-center text-lg lg:text-2xl md:text-xl sm:text-lg whitespace-nowrap dark:text-white">
                 AN-Luxuries
               </span>
