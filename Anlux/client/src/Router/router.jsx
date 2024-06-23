@@ -1,8 +1,10 @@
 import React, { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
+import Allwatches from '../Screens/Watches/Allwatches';
+import Addwatches from '../Screens/Admin/Addwatches';
 
-const Homebags = React.lazy(() => import('../Screens/Bags/Homebags'));
+const Homebags = React.lazy(() => import('../Screens/Home/Home'));
 const Allbags = React.lazy(() => import('../Screens/Bags/Allbags'));
 const AddProductForm = React.lazy(() => import('../Screens/Admin/AddBags'));
 const AddGlasses = React.lazy(() => import('../Screens/Admin/Addglasses'));
@@ -54,6 +56,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <Allglasses />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/Add-watches', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Addwatches />
+          </Suspense>
+        ) 
+      },
+      { 
+        path: '/All-watches', 
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Allwatches />
           </Suspense>
         ) 
       },

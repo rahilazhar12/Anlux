@@ -31,7 +31,7 @@ const CartModal = ({ isOpen, closeModal }) => {
 
   return (
     <Transition show={isOpen}>
-      <Dialog className="relative z-10" onClose={closeModal}>
+      <Dialog className="relative z-50" onClose={closeModal}>
         <Transition.Child
           enter="ease-in-out duration-500"
           enterFrom="opacity-0"

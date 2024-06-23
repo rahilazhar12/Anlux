@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Bagscards = ({ product, openCartModal }) => {
+const Watchescards = ({ product, openCartModal }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
@@ -59,4 +59,4 @@ const Bagscards = ({ product, openCartModal }) => {
   );
 }
 
-export default Bagscards;
+export default Watchescards;

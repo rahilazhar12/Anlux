@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart } from '../../Redux/cartSlice'; // Adjust the path as necessary
+import {  useSelector } from 'react-redux';
 import CartModal from '../../Components/CartModal/CartModal'; // Adjust the path as necessary
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { CircleLoader } from 'react-spinners';
+import {CircleLoader} from 'react-spinners'
 
-function Allglasses() {
+function Allwatches() {
   const navigate = useNavigate();
   const [bags, setBags] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
   useEffect(() => {
     const fetchBags = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/glasses-get`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/watches-get`);
         const data = await response.json();
         setBags(data);
       } catch (error) {
@@ -50,10 +47,10 @@ function Allglasses() {
     <div className="container mx-auto p-8 relative">
       {isLoading && (
         <div className="flex items-center justify-center fixed inset-0 bg-white bg-opacity-75 z-50">
-         <CircleLoader color="#d63673"  size={80} />
+          <CircleLoader color="#d63673"  size={80} />
         </div>
       )}
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-gray-800">Glasses Collection</h1>
+      <h1 className="text-4xl font-extrabold mb-8 text-center text-gray-800">Watches Collection</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {bags.map((bag) => (
           <div key={bag._id} className="relative bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -100,4 +97,4 @@ function Allglasses() {
   );
 }
 
-export default Allglasses;
+export default Allwatches;

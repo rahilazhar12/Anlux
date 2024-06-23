@@ -5,6 +5,7 @@ const SummaryPage = () => {
 
   useEffect(() => {
     fetchOrders();
+    window.scrollTo(0,0)
   }, []);
 
   const fetchOrders = async () => {
