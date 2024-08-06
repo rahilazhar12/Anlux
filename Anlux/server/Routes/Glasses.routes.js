@@ -8,7 +8,8 @@ const { Glassespost, getAllGlasses, getGlassById, orderimagechange, getItemById 
 const router = express.Router()
 
 
-router.post('/glasses-post', upload.array('images', 5), Glassespost)
+
+router.post('/glasses-post', upload.fields([{ name: 'mainImage', maxCount: 1 }, { name: 'additionalImages', maxCount: 4 }]), Glassespost);
 router.get('/glasses-get', getAllGlasses)
 router.get('/getglassesonid/:id', getItemById)
 router.post('/orderchange/:id', orderimagechange)

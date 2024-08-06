@@ -9,7 +9,7 @@ const { Watchespost, getAllWatches } = require('../Controllers/Watches.controlle
 const router = express.Router()
 
 
-router.post('/watches-post', upload.array('images', 5), Watchespost)
+router.post('/watches-post', upload.fields([{ name: 'mainImage', maxCount: 1 }, { name: 'additionalImages', maxCount: 4 }]), Watchespost);
 router.get('/watches-get', getAllWatches)
 
 
