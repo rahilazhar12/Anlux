@@ -1,4 +1,5 @@
-'use client';
+// pages/product/[slug].js
+'use client'
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,9 +9,6 @@ import { FaTruckFast } from "react-icons/fa6";
 import { FaShieldAlt } from "react-icons/fa";
 import Anloader from '@/components/Loader/Anloader';
 import ScrollToTop from '@/components/Scrolltotop/ScrollToTop';
-import { loadStripe } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe('pk_test_51PmBjzCJ5MpaKpVP3iajKxtsvRZOCBJM0Z3EwpOTyVTYmxoLj6Cbu935WWJR6E8lJpxNldUyMB1SShCPFTTkJDEN00nplgJL8o');
 
 const Product = ({ params }) => {
   const dispatch = useDispatch();
@@ -44,34 +42,10 @@ const Product = ({ params }) => {
     }
   }, [cartItems, product]);
 
-  const handleAddToCart = async (product) => {
-    try {
-      const stripe = await stripePromise;
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/create-checkout-session`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId: product._id,
-          quantity: 1, // Adjust as needed
-        }),
-      });
-
-      const session = await response.json();
-
-      // Redirect to Stripe checkout page
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
-
-      if (result.error) {
-        console.error(result.error.message);
-      }
-    } catch (error) {
-      console.error('Error redirecting to Stripe checkout:', error);
-    }
+  const handleAddToCart = (product) => {
+    dispatch(addItemToCart(product));
+    setAddedToCart(true);
+    setIsCartModalOpen(true);
   };
 
   const closeCartModal = () => {
@@ -119,33 +93,36 @@ const Product = ({ params }) => {
               <p className="text-xl text-gray-400 line-through">Rs. {product.oldPrice}</p>
               <p className="text-xl font-bold text-red-600">Rs. {product.newPrice}</p>
             </div>
-
+           
             <ul className="list-disc list-inside text-gray-600 mb-4">
-              <div className='flex items-center gap-3'>
+
+                <div className='flex items-center gap-3'>
                 <FaTruckFast />
                 <p>FREE delivery over Rs. 3499!</p>
-              </div>
-              <div className='md:ml-5 text-xs text-gray-400 p-3'>
-                <p>Rs.200 delivery charges nationwide.</p>
-                <p>Delivery within 2-5 days.</p>
-              </div>
+                </div>
+                <div className='md:ml-5 text-xs text-gray-400 p-3'>
+                  <p>Rs.200 delivery charges nationwide.</p>
+                  <p>Delivery within 2-5 days.</p>
+                </div>
 
-              <div className='flex items-center gap-3'>
+
+
+                <div className='flex items-center gap-3'>
                 <FaShieldAlt />
                 <p>FREE returns and exchanges!</p>
-              </div>
-              <div className='md:ml-5 text-sm text-gray-400 p-3'>
-                <p><span className='text-gray-500 font-bold'>100%</span> <span className='text-xs'>customer satisfaction guaranteed.</span></p>
-                <p><span className='text-gray-500 font-bold'>FREE LIFETIME</span> <span className='text-xs'>returns and exchanges.</span></p>
-              </div>
+                </div>
+                <div className='md:ml-5 text-sm text-gray-400 p-3'>
+                  <p><span className='text-gray-500 font-bold'>100%</span> <span className='text-xs'>customer satisfaction guaranteed.</span></p>
+                  <p><span className='text-gray-500 font-bold'>FREE LIFETIME</span> <span className='text-xs'>returns and exchanges.</span></p>
+                </div>
             </ul>
             <div className='mx-auto flex'>
-              <button
-                className="w-full  bg-gray-700 text-white px-6 py-2 rounded-md shadow-md hover:bg-gray-900 transition-colors duration-300"
-                onClick={() => handleAddToCart(product)}
-              >
-                Buy Now
-              </button>
+            <button
+              className="w-full  bg-gray-700 text-white px-6 py-2 rounded-md shadow-md hover:bg-gray-900 transition-colors duration-300"
+              onClick={() => handleAddToCart(product)}
+            >
+              Buy Now
+            </button>
             </div>
           </div>
         </div>
